@@ -29,8 +29,9 @@ class SettingsActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferen
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         if (key == "capture_time") {
             if (CaptureService.isServiceRunning) {
-                stopService(Intent(this, CaptureService::class.java))
-                startService(Intent(this, CaptureService::class.java))
+                val intent = Intent(this, CaptureService::class.java)
+                stopService(intent)
+                startService(intent)
             }
         }
     }

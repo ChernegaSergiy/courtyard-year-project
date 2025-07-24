@@ -29,7 +29,6 @@
         </activity>
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/settings_activity_name"
             android:parentActivityName=".MainActivity" />
         <service android:name=".CaptureService" />
     </application>
