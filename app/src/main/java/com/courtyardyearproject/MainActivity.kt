@@ -56,6 +56,14 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         updateButtonText()
+        if (allPermissionsGranted()) {
+            startCamera()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        cameraProviderFuture.get().unbindAll()
     }
 
     private fun updateButtonText() {
