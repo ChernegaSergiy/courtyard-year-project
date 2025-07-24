@@ -137,13 +137,16 @@ class CaptureService : Service(), LifecycleOwner {
         val imageCapture = imageCapture ?: return
 
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val storageDir = sharedPreferences.getString("storage_directory", "CourtyardYearProject")
+        val storageDirName = sharedPreferences.getString("storage_directory", "CourtyardYearProject")
+        val dcimDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
+        val storageDir = File(dcimDir, storageDirName)
+        storageDir.mkdirs()
+
         val photoFile = File(
-            getExternalFilesDir(null),
-            "$storageDir/${SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS", Locale.US)
+            storageDir,
+            "${SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS", Locale.US)
                 .format(System.currentTimeMillis())}.jpg"
         )
-        photoFile.parentFile?.mkdirs()
 
 
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
