@@ -19,7 +19,8 @@
         tools:targetApi="31">
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:label="@string/main_activity_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,6 +29,7 @@
         </activity>
         <activity
             android:name=".SettingsActivity"
+            android:label="@string/settings_activity_name"
             android:parentActivityName=".MainActivity" />
         <service android:name=".CaptureService" />
     </application>
