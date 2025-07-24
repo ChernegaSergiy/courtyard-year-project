@@ -57,7 +57,6 @@ class CaptureService : Service(), LifecycleOwner {
         startForeground(NOTIFICATION_ID, notification)
 
         setupTimer()
-        startCamera()
 
         return START_STICKY
     }
