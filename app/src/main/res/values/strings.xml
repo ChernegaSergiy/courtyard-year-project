@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Courtyard Year Project</string>
+    <string name="main_activity_name">Home</string>
     <string name="settings_activity_name">Settings</string>
 </resources>
