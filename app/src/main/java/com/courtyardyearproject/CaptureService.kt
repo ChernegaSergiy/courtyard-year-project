@@ -156,7 +156,7 @@ class CaptureService : Service(), LifecycleOwner {
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d(TAG, "onDestroy")
+        FileLogger.log(TAG, "onDestroy")
         isServiceRunning = false
         handler.removeCallbacks(runnable)
         cameraExecutor.shutdown()
