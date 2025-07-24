@@ -119,7 +119,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        FileLogger.log(TAG, "onDestroy")
+        FileLogger.log(applicationContext, TAG, "onDestroy")
         cameraExecutor.shutdown()
     }
 
