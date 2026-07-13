@@ -1,5 +1,8 @@
 # Courtyard Year Project
 
+[![Build Debug APK](https://github.com/ChernegaSergiy/courtyard-year-project/actions/workflows/debug-build.yml/badge.svg)](https://github.com/ChernegaSergiy/courtyard-year-project/actions/workflows/debug-build.yml)
+[![Validate Gradle Wrapper](https://github.com/ChernegaSergiy/courtyard-year-project/actions/workflows/gradle-wrapper-validation.yml/badge.svg)](https://github.com/ChernegaSergiy/courtyard-year-project/actions/workflows/gradle-wrapper-validation.yml)
+
 This is an Android application designed to automate the process of taking a photo of the same scene at the same time every day for a year. The goal is to collect a series of images that can be later compiled into a time-lapse video or slideshow.
 
 ## Features
