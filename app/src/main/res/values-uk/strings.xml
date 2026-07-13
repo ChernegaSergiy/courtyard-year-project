@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Проєкт "Рік двору"</string>
+    <string name="app_name">Проєкт \"Рік двору\"</string>
     <string name="main_activity_name">Головна</string>
     <string name="settings_activity_name">Налаштування</string>
 
