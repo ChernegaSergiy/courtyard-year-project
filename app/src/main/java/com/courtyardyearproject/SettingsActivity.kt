@@ -20,6 +20,18 @@ class SettingsActivity : Activity(), SharedPreferences.OnSharedPreferenceChangeL
         actionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
+    override fun onResume() {
+        super.onResume()
+        android.preference.PreferenceManager.getDefaultSharedPreferences(this)
+            .registerOnSharedPreferenceChangeListener(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        android.preference.PreferenceManager.getDefaultSharedPreferences(this)
+            .unregisterOnSharedPreferenceChangeListener(this)
+    }
+
     class SettingsFragment : PreferenceFragment() {
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
