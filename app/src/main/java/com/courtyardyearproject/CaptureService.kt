@@ -8,10 +8,10 @@ import android.app.Service
 import android.content.Intent
 import android.os.Build
 import android.os.Environment
-import android.os.Handler
 import android.os.IBinder
-import android.os.Looper
 import android.util.Log
+import android.app.AlarmManager
+import android.content.Context
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
@@ -37,8 +37,6 @@ class CaptureService : Service(), LifecycleOwner {
     private lateinit var cameraProviderFuture : ListenableFuture<ProcessCameraProvider>
     private lateinit var cameraExecutor: ExecutorService
     private var imageCapture: ImageCapture? = null
-    private val handler = Handler(Looper.getMainLooper())
-    private lateinit var runnable: Runnable
 
     override fun onCreate() {
         super.onCreate()
@@ -67,10 +65,14 @@ class CaptureService : Service(), LifecycleOwner {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         lifecycleRegistry.currentState = Lifecycle.State.STARTED
-        Log.d(TAG, "Capture service started")
+        Log.d(TAG, "Capture service started or received intent")
 
         val notification = createNotification()
         startForeground(NOTIFICATION_ID, notification)
+
+        if (intent?.action == ACTION_TAKE_PHOTO) {
+            takePhoto()
+        }
 
         setupTimer()
 
@@ -97,13 +99,31 @@ class CaptureService : Service(), LifecycleOwner {
             calendar.add(Calendar.DAY_OF_YEAR, 1)
         }
 
-        val delay = calendar.timeInMillis - System.currentTimeMillis()
-
-        runnable = Runnable {
-            takePhoto()
-            setupTimer() // Reschedule for the next day
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(this, CaptureService::class.java).apply {
+            action = ACTION_TAKE_PHOTO
         }
-        handler.postDelayed(runnable, delay)
+        val pendingIntent = PendingIntent.getService(
+            this,
+            0,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            alarmManager.setExactAndAllowWhileIdle(
+                AlarmManager.RTC_WAKEUP,
+                calendar.timeInMillis,
+                pendingIntent
+            )
+        } else {
+            alarmManager.setExact(
+                AlarmManager.RTC_WAKEUP,
+                calendar.timeInMillis,
+                pendingIntent
+            )
+        }
+
         Log.d(TAG, "Next capture scheduled for: ${calendar.time}")
     }
 
@@ -174,9 +194,20 @@ class CaptureService : Service(), LifecycleOwner {
         super.onDestroy()
         FileLogger.log(applicationContext, TAG, "onDestroy")
         isServiceRunning = false
-        handler.removeCallbacks(runnable)
         cameraExecutor.shutdown()
         lifecycleRegistry.currentState = Lifecycle.State.DESTROYED
+        
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(this, CaptureService::class.java).apply {
+            action = ACTION_TAKE_PHOTO
+        }
+        val pendingIntent = PendingIntent.getService(
+            this,
+            0,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+        alarmManager.cancel(pendingIntent)
     }
 
     override val lifecycle: Lifecycle
@@ -186,6 +217,7 @@ class CaptureService : Service(), LifecycleOwner {
         private const val TAG = "CaptureService"
         private const val CHANNEL_ID = "CaptureServiceChannel"
         private const val NOTIFICATION_ID = 1
+        private const val ACTION_TAKE_PHOTO = "ACTION_TAKE_PHOTO"
         var isServiceRunning = false
     }
 }
