@@ -21,7 +21,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
-import androidx.preference.PreferenceManager
+import android.preference.PreferenceManager
 import com.google.common.util.concurrent.ListenableFuture
 import java.io.File
 import java.text.SimpleDateFormat
