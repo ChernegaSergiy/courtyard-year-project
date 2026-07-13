@@ -15,3 +15,7 @@ This is an Android application designed to automate the process of taking a phot
 ## Build
 
 This project is configured to be built using GitHub Actions. A debug APK is automatically generated for every push to the `main` branch.
+
+## License
+
+This project is licensed under the CSSM Unlimited License v2.0 (CSSM-ULv2). See the [LICENSE](LICENSE) file for details.
