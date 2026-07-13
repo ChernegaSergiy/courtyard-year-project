@@ -6,7 +6,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.ComponentActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
@@ -17,7 +17,7 @@ import com.google.common.util.concurrent.ListenableFuture
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
 
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var cameraProviderFuture : ListenableFuture<ProcessCameraProvider>

@@ -3,26 +3,27 @@ package com.courtyardyearproject
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.preference.PreferenceFragmentCompat
+import android.app.Activity
+import android.preference.PreferenceFragment
 
-class SettingsActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
+class SettingsActivity : Activity(), SharedPreferences.OnSharedPreferenceChangeListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
         if (savedInstanceState == null) {
-            supportFragmentManager
+            fragmentManager
                 .beginTransaction()
                 .replace(R.id.settings, SettingsFragment())
                 .commit()
         }
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        actionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    class SettingsFragment : PreferenceFragmentCompat() {
-        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            setPreferencesFromResource(R.xml.root_preferences, rootKey)
+    class SettingsFragment : PreferenceFragment() {
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            addPreferencesFromResource(R.xml.root_preferences)
         }
     }
 
