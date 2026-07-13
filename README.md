@@ -14,4 +14,4 @@ This is an Android application designed to automate the process of taking a phot
 
 ## Build
 
-This project is configured to be built using GitHub Actions. A debug APK is automatically generated for every push to the `master` branch.
+This project is configured to be built using GitHub Actions. A debug APK is automatically generated for every push to the `main` branch.
