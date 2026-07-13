@@ -68,7 +68,11 @@ class CaptureService : Service(), LifecycleOwner {
         Log.d(TAG, "Capture service started or received intent")
 
         val notification = createNotification()
-        startForeground(NOTIFICATION_ID, notification)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            startForeground(NOTIFICATION_ID, notification, android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_CAMERA)
+        } else {
+            startForeground(NOTIFICATION_ID, notification)
+        }
 
         if (intent?.action == ACTION_TAKE_PHOTO) {
             takePhoto()

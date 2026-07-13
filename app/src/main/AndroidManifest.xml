@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CAMERA" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 
     <application
@@ -30,7 +31,7 @@
             android:name=".SettingsActivity"
             android:label="@string/settings_activity_name"
             android:parentActivityName=".MainActivity" />
-        <service android:name=".CaptureService" />
+        <service android:name=".CaptureService" android:foregroundServiceType="camera" />
     </application>
 
 </manifest>
