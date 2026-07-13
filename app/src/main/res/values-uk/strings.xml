@@ -2,4 +2,14 @@
     <string name="app_name">Проєкт "Рік двору"</string>
     <string name="main_activity_name">Головна</string>
     <string name="settings_activity_name">Налаштування</string>
+
+    <string name="btn_settings">Налаштування</string>
+    <string name="btn_start_service">Запустити службу зйомки</string>
+    <string name="btn_stop_service">Зупинити службу зйомки</string>
+
+    <string name="pref_capture_settings_title">Налаштування зйомки</string>
+    <string name="pref_capture_time_title">Час зйомки</string>
+    <string name="pref_capture_time_summary">Встановіть час для щоденної зйомки (ГГ:хх)</string>
+    <string name="pref_storage_dir_title">Папка для збереження</string>
+    <string name="pref_storage_dir_summary">Встановіть папку для збереження зображень</string>
 </resources>
