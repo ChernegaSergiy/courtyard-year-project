@@ -29,13 +29,13 @@
             android:id="@+id/settings_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Settings" />
+            android:text="@string/btn_settings" />
 
         <Button
             android:id="@+id/toggle_service_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Start Capture Service" />
+            android:text="@string/btn_start_service" />
 
     </LinearLayout>
 

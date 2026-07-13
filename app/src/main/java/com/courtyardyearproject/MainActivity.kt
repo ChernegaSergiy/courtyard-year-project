@@ -69,9 +69,9 @@ class MainActivity : ComponentActivity() {
 
     private fun updateButtonText() {
         toggleServiceButton.text = if (CaptureService.isServiceRunning) {
-            "Stop Capture Service"
+            getString(R.string.btn_stop_service)
         } else {
-            "Start Capture Service"
+            getString(R.string.btn_start_service)
         }
     }
 

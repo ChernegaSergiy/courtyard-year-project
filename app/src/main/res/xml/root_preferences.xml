@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="Capture Settings">
+    <PreferenceCategory android:title="@string/pref_capture_settings_title">
 
         <EditTextPreference
             android:key="capture_time"
-            android:title="Capture Time"
-            android:summary="Set the time for the daily capture (HH:mm)"
+            android:title="@string/pref_capture_time_title"
+            android:summary="@string/pref_capture_time_summary"
             android:defaultValue="12:00" />
 
         <EditTextPreference
             android:key="storage_directory"
-            android:title="Storage Directory"
-            android:summary="Set the directory to save images"
+            android:title="@string/pref_storage_dir_title"
+            android:summary="@string/pref_storage_dir_summary"
             android:defaultValue="CourtyardYearProject" />
 
     </PreferenceCategory>
