@@ -40,8 +40,10 @@ class MainActivity : ComponentActivity() {
         toggleServiceButton.setOnClickListener {
             if (CaptureService.isServiceRunning) {
                 stopService(Intent(this, CaptureService::class.java))
+                CaptureService.isServiceRunning = false
             } else {
                 startService(Intent(this, CaptureService::class.java))
+                CaptureService.isServiceRunning = true
             }
             updateButtonText()
         }
