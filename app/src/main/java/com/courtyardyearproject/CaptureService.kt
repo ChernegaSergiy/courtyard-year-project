@@ -157,7 +157,12 @@ class CaptureService : Service(), LifecycleOwner {
     }
 
     private fun takePhoto() {
-        val imageCapture = imageCapture ?: return
+        val capture = imageCapture
+        if (capture == null) {
+            Log.w(TAG, "imageCapture is null. Retrying in 1 second...")
+            android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({ takePhoto() }, 1000)
+            return
+        }
 
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val storageDirName = sharedPreferences.getString("storage_directory", "CourtyardYearProject")
@@ -174,7 +179,7 @@ class CaptureService : Service(), LifecycleOwner {
 
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
 
-        imageCapture.takePicture(
+        capture.takePicture(
             outputOptions,
             ContextCompat.getMainExecutor(this),
             object : ImageCapture.OnImageSavedCallback {
